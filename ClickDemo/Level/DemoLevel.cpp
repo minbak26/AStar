@@ -176,39 +176,8 @@ void DemoLevel::UpdatePath()
     //
     path = aStar.FindPath(startNode,goalNode, grid);
 
-    if (!path.empty())
-    {
-        //경로 확인
-        //OutputDebugStringA("경로를 찾았습니다.\n");
-
+    
        
-        //// 기존 경로 삭제
-        ////한번은 그냥 넘겨야 함
-        //if (!wayPoint.empty())
-        //{
-        //    for (int i = 1; i < (int)(wayPoint.size()-1); ++i)
-        //    {
-        //        Engine::Get().DestroyActor(wayPoint[i]);
-        //    }
-        //    wayPoint.clear();
-        //}
-     
-     
-
-        
-            //위껄로 수정
-       //for (auto* node : path)
-       //{
-       //    Way* way = new Way(node->GetNodeX(), node->GetNodeY());
-       //    wayPoint.push_back(way);
-       //    AddActor(way);
-       //}
-       
-    }
-    else
-    {
-        //std::cout << "경로를 찾지 못했습니다.\n";
-    }
 
     delete goalNode;
     
@@ -228,15 +197,14 @@ void DemoLevel::Draw()
 
     path = aStar.FindPath(startNode, goalNode, grid);
 
+    //super::draw : 경로빼고 나머지 출력 역할
     Super::Draw();
+    
     if (!path.empty())
     {
         for (int i = 1; i < path.size() -1; ++i)
          {
-
-           //if (startGetX == path[i]->GetNodeX() && startGetY == path[i]->GetNodeY() ||
-           //    playerGetX == path[i]->GetNodeX() && playerGetY == path[i]->GetNodeY())
-           //        continue;
+         //경로 그리기
          Engine::Get().Draw(Vector2(path[i]->GetNodeX(), path[i]->GetNodeY()), "T", Color::Green);
         }
 
